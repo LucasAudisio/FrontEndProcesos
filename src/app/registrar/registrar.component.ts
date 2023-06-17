@@ -40,4 +40,10 @@ export class RegistrarComponent {
       });
     }
   }
+
+  ngOnInit(){
+    if(localStorage["clave"] != undefined){
+      this.router.navigate(["/"]);
+    }
+  }
 }

@@ -26,12 +26,23 @@ export class LoginComponent {
     this.http.login(bodyData).subscribe({
       next: (data) => {
         console.log(data)
-        localStorage["clave"] = JSON.parse(JSON.stringify(data)).token;
-        this.router.navigate(["/"]);
+        if(JSON.parse(JSON.stringify(data)).message != undefined){
+          this.error = JSON.parse(JSON.stringify(data)).message;
+        }
+        else{
+          localStorage["clave"] = JSON.parse(JSON.stringify(data)).token;
+          this.router.navigate(["/"]);
+        }
       },
       error: (error) => {
         this.error = error.error;
       }
     })
+  }
+
+  ngOnInit(){
+    if(localStorage["clave"] != undefined){
+      this.router.navigate(["/"]);
+    }
   }
 }
