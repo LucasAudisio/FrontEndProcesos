@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from  '@angular/common/http';
 import { Injectable } from  '@angular/core';
+import { Observable, catchError, map, of } from 'rxjs';
 
 @Injectable({
 providedIn:  'root'
@@ -20,6 +21,25 @@ export class HttpService {
   }
 
   // metodos piezas
+
+  existePieza(id: number): Observable<boolean> {
+    return this.http.get(this.urlApi + "/piezas", { headers: {Authorization: localStorage["clave"]}})
+      .pipe(
+        map((data: any) => {
+          for(let i = 0; i < JSON.parse(JSON.stringify(data)).data.length; i++) {
+            if(JSON.parse(JSON.stringify(data)).data[i].id == id) {
+              return true;
+            }
+          }
+          return false;
+        }),
+        catchError((error: any) => {
+          console.log(error);
+          return of(false);
+        })
+      );
+  }
+
   getPiezas(){
     return this.http.get(this.urlApi + "/piezas", {headers: {Authorization: localStorage["clave"]}});
   }
@@ -46,6 +66,18 @@ export class HttpService {
       peso: peso,
       material: material
     };
-  return this.http.patch(this.urlApi + "/piezas", cuerpo, {headers: {Authorization: localStorage["clave"]}});
+    return this.http.patch(this.urlApi + "/piezas", cuerpo, {headers: {Authorization: localStorage["clave"]}});
+  }
+
+  getComponentes(id: Number){
+    return this.http.get(this.urlApi + "/piezas/" + String(id) + "/componentes", {headers: {Authorization: localStorage["clave"]}});
+  }
+
+  postComponentes(idPadre: Number, idHijo: Number){
+    return this.http.post(this.urlApi + "/piezas/" + String(idPadre) + "/componentes/" + String(idHijo), {} ,{headers: {Authorization: localStorage["clave"]}});
+  }
+
+  deleteComponentes(idPadre: Number, idHijo: Number){
+    return this.http.delete(this.urlApi + "/piezas/" + String(idPadre) + "/componentes/" + String(idHijo),{headers: {Authorization: localStorage["clave"]}});
   }
 }
