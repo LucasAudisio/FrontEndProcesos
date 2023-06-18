@@ -1,1 +1,55 @@
-<button >Get All piezas</button>
+<p>Recibir todas las piezas</p>
+<button (click)="getAllPiezas()">Get todas las piezas</button>
+<p>{{errorPiezasLista}}</p>
+<table *ngIf=getPiezas>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Material</th>
+            <th>Peso</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor = "let item of piezasLista; let i = index" [attr.data-index]="i">
+            <td>{{piezasLista[i].id}}</td>
+            <td>{{piezasLista[i].material}}</td>
+            <td>{{piezasLista[i].peso}}</td>
+        </tr>
+    </tbody>
+</table>
+
+<hr>
+
+<p>Recibir pieza por id</p>
+<input type="number" [(ngModel)] = "idGetPieza" placeholder="ingrese el id">
+<button (click)="getPieza()">Get pieza por id</button>
+<p>{{respuestaGetPieza}}</p>
+
+<hr>
+
+<p>Subir pieza</p>
+<p></p>
+<input type="text" [(ngModel)] = "materialPostPieza" placeholder="ingrese el material">
+<input type="text" [(ngModel)] = "pesoPostPieza" placeholder="ingrese el peso">
+<button (click)="postPieza()">Post pieza</button>
+<p>{{respuestaPostPieza}}</p>
+
+<hr>
+
+<p>Borrar pieza</p>
+<input type="number" [(ngModel)]="idDeletePieza" placeholder="ingrese el id">
+<button (click)="deletePieza()">Delete pieza</button>
+<p>{{respuestaDeletePieza}}</p>
+
+<hr>
+<p>Modificar pieza (dejar campo vacio si no se quiere modificar)</p>
+<p>El campo de id es obligatorio y es para saber que pieza modificar</p>
+<input type="number" [(ngModel)]="idPatchPieza" placeholder="ingrese el id">
+<input type="text" [(ngModel)]="materialPatchPieza" placeholder="ingrese el material">
+<input type="number" [(ngModel)]="pesoPatchPieza" placeholder="ingrese el peso">
+<button (click)="patchPieza()">Patch pieza</button>
+<p>{{respuestaPatchPieza}}</p>
+
+<hr>
+
+<button (click)="volverMenu()">Volver al menu</button>
