@@ -80,4 +80,51 @@ export class HttpService {
   deleteComponentes(idPadre: Number, idHijo: Number){
     return this.http.delete(this.urlApi + "/piezas/" + String(idPadre) + "/componentes/" + String(idHijo),{headers: {Authorization: localStorage["clave"]}});
   }
+
+  // metodos procesos
+  existeProceso(id: number): Observable<boolean> {
+    return this.http.get(this.urlApi + "/procesos", { headers: {Authorization: localStorage["clave"]}})
+      .pipe(
+        map((data: any) => {
+          for(let i = 0; i < JSON.parse(JSON.stringify(data)).data.length; i++) {
+            if(JSON.parse(JSON.stringify(data)).data[i].id == id) {
+              return true;
+            }
+          }
+          return false;
+        }),
+        catchError((error: any) => {
+          console.log(error);
+          return of(false);
+        })
+      );
+  }
+
+  getProcesos(){
+    return this.http.get(this.urlApi + "/procesos", {headers: {Authorization: localStorage["clave"]}});
+  }
+
+  getProceso(id: Number){
+    return this.http.get(this.urlApi + "/procesos/" + String(id), {headers: {Authorization: localStorage["clave"]}});
+  }
+
+  postProceso(idPieza: Number, tipo: String){
+    const cuerpo: Object = {
+      id_pieza_salida: idPieza,
+      tipo: tipo
+    };
+    return this.http.post(this.urlApi + "/procesos", cuerpo, {headers: {Authorization: localStorage["clave"]}})
+  }
+
+  deleteProceso(id: Number){
+    return this.http.delete(this.urlApi + "/procesos/" + id, {headers: {Authorization: localStorage["clave"]}})
+  }
+
+  getEntradas(id: Number){
+    return this.http.get(this.urlApi + "/procesos/" + String(id) + "/piezasEntrada", {headers: {Authorization: localStorage["clave"]}});
+  }
+
+  getSalida(id: Number){
+    return this.http.get(this.urlApi + "/procesos/" + String(id) + "/piezasSalida", {headers: {Authorization: localStorage["clave"]}});
+  }
 }

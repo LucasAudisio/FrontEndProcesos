@@ -1,5 +1,23 @@
-<button *ngIf = "mostrarIniciar" (click) = 'this.redirectLogin()'>Iniciar sesion</button>
-<button *ngIf = "mostrarRegistrar" (click) = 'redirectRegistrarse()'>Registrarse</button> 
-<button *ngIf = "mostrarCerrar" (click) = 'cerrarSesion()'>Cerrar Sesion</button> <br>
+<!DOCTYPE html>
+<html lang="es">
 
-<button (click) = "piezas()">Piezas</button>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Menú principal</h1>
+
+        <button *ngIf="mostrarIniciar" (click)="redirectLogin()">Iniciar sesión</button>
+        <button *ngIf="mostrarRegistrar" (click)="redirectRegistrarse()">Registrarse</button>
+        <button *ngIf="mostrarCerrar" (click)="cerrarSesion()">Cerrar sesión</button>
+        <br>
+
+        <button (click)="piezas()">Piezas</button>
+        <button (click)="procesos()">Procesos</button>
+    </div>
+</body>
+
+</html>

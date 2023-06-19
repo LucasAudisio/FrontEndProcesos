@@ -37,6 +37,10 @@ export class InicioComponent {
     this.router.navigate(["/piezas"]);
   }
 
+  procesos(){
+    this.router.navigate(["/procesos"]);
+  }
+
   cerrarSesion(){
     localStorage.removeItem("clave");
     this.mostrarIniciar = true;

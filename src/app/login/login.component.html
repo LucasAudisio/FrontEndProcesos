@@ -1,8 +1,27 @@
-<input type="text" [(ngModel)] = "nombre" placeholder="Ingrese el nombre">
-<input type="password" [(ngModel)] = "contrasenia" placeholder="Ingrese la contraseña">
+<!DOCTYPE html>
+<html lang="es">
 
-<button (click) = 'login()'>Iniciar Sesion</button>
-<p>{{error}}</p>
-<br>    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
 
-<a href="/registrarse">Presiona aqui si no tenes cuenta</a>
+<body>
+    <div class="container">
+        <h1>Iniciar Sesion</h1>
+        <input type="text" [(ngModel)]="nombre" placeholder="Ingrese el nombre">
+        <input type="password" [(ngModel)]="contrasenia" placeholder="Ingrese la contraseña">
+        
+        <div>
+            <button style="background-color: red;" (click)="volverMenu()">Volver al menú</button>
+            <button (click)='login()'>Iniciar Sesion</button>
+        </div>
+
+        <p>{{error}}</p>
+        <br>
+    
+        <a href="/registrarse">Presiona aqui si no tenes cuenta</a>
+    </div>
+</body>
+
+</html>

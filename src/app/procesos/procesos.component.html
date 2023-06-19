@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Procesos</h1>
+
+        <h2>Recibir todas los procesos</h2>
+        <button (click)="getAllProcesos()">Get procesos</button>
+        <p>{{errorProcesosLista}}</p>
+        <table *ngIf=getProcesos>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>ID pieza salida</th>
+                    <th>Tipo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of procesosLista; let i = index" [attr.data-index]="i">
+                    <td>{{procesosLista[i].id}}</td>
+                    <td>{{procesosLista[i].id_pieza_salida}}</td>
+                    <td>{{procesosLista[i].tipo}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Recibir proceso por id</h2>
+        <input type="number" [(ngModel)]="idGetProceso" placeholder="ingrese el id">
+        <button (click)="getProceso()">Get proceso</button>
+        <p>{{respuestaGetProceso}}</p>
+
+        <h2>Subir proceso</h2>
+        <input type="number" [(ngModel)]="idPiezaPostProceso" placeholder="ingrese el id de la pieza de salida">
+        <input type="text" [(ngModel)]="tipoPostPieza" placeholder="ingrese el tipo de proceso">
+        <button (click)="postProceso()">Post proceso</button>
+        <p>{{respuestaPostProceso}}</p>
+
+        <h2>Borrar proceso</h2>
+        <input type="number" [(ngModel)]="idDeleteProceso" placeholder="ingrese el id">
+        <button (click)="deleteProceso()">Delete pieza</button>
+        <p>{{respuestaDeleteProceso}}</p>
+
+        <h2>Recibir piezas de entrada</h2>
+        <input type="number" [(ngModel)]="idProcesosEntradas" placeholder="ingrese el id de la pieza padre">
+        <button (click)="getEntradas()">Get piezas entrada</button>
+        <p>{{respuestaGetEntradas}}</p>
+        <table *ngIf=getIfEntradas>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>ID pieza salida</th>
+                    <th>Tipo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of EntradasLista; let i = index" [attr.data-index]="i">
+                    <td>{{EntradasLista[i].id}}</td>
+                    <td>{{EntradasLista[i].id_pieza_salida}}</td>
+                    <td>{{EntradasLista[i].tipo}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Recibir pieza de salida</h2>
+        <input type="number" [(ngModel)]="idProcesosSalida" placeholder="ingrese el id de la pieza padre">
+        <button (click)="getSalida()">Get pieza salida</button>
+        <p>{{respuestaGetSalida}}</p>
+
+        <button style="background-color: red; margin: 0; align-self: flex-end; margin-left: 3vw;" (click)="volverMenu()">Volver al menu</button>
+    </div>
+</body>
+
+</html>

@@ -4,6 +4,7 @@ import { InicioComponent } from './inicio/inicio.component';
 import { LoginComponent } from './login/login.component';
 import { PiezasComponent } from './piezas/piezas.component';
 import { RegistrarComponent } from './registrar/registrar.component';
+import { ProcesosComponent } from './procesos/procesos.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,11 @@ const routes: Routes = [
     path: "piezas",
     component: PiezasComponent,
     title: "piezas"
+  },
+  {
+    path: "procesos",
+    component: ProcesosComponent,
+    title: "procesos"
   }
 ];
 

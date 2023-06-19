@@ -45,4 +45,8 @@ export class LoginComponent {
       this.router.navigate(["/"]);
     }
   }
+
+  volverMenu() {
+    this.router.navigate(["/"]);
+  }
 }

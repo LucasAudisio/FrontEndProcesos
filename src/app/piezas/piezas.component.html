@@ -1,98 +1,94 @@
-<h1>Piezas</h1>
+<!DOCTYPE html>
+<html lang="es">
 
-<hr>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
 
-<p>Recibir todas las piezas</p>
-<button (click)="getAllPiezas()">Get todas las piezas</button>
-<p>{{errorPiezasLista}}</p>
-<table *ngIf=getPiezas>
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Material</th>
-            <th>Peso</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor = "let item of piezasLista; let i = index" [attr.data-index]="i">
-            <td>{{piezasLista[i].id}}</td>
-            <td>{{piezasLista[i].material}}</td>
-            <td>{{piezasLista[i].peso}}</td>
-        </tr>
-    </tbody>
-</table>
+<body>
+    <div class="container">
+        <h1>Piezas</h1>
 
-<hr>
+        <h2>Recibir todas las piezas</h2>
+        <button (click)="getAllPiezas()">Get todas las piezas</button>
+        <p>{{errorPiezasLista}}</p>
+        <table *ngIf=getPiezas>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Material</th>
+                    <th>Peso</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of piezasLista; let i = index" [attr.data-index]="i">
+                    <td>{{piezasLista[i].id}}</td>
+                    <td>{{piezasLista[i].material}}</td>
+                    <td>{{piezasLista[i].peso}}</td>
+                </tr>
+            </tbody>
+        </table>
 
-<p>Recibir pieza por id</p>
-<input type="number" [(ngModel)] = "idGetPieza" placeholder="ingrese el id">
-<button (click)="getPieza()">Get pieza por id</button>
-<p>{{respuestaGetPieza}}</p>
+        <h2>Recibir pieza por id</h2>
+        <input type="number" [(ngModel)]="idGetPieza" placeholder="ingrese el id">
+        <button (click)="getPieza()">Get pieza por id</button>
+        <p>{{respuestaGetPieza}}</p>
 
-<hr>
+        <h2>Subir pieza</h2>
+        <input type="text" [(ngModel)]="materialPostPieza" placeholder="ingrese el material">
+        <input type="text" [(ngModel)]="pesoPostPieza" placeholder="ingrese el peso">
+        <button (click)="postPieza()">Post pieza</button>
+        <p>{{respuestaPostPieza}}</p>
 
-<p>Subir pieza</p>
-<p></p>
-<input type="text" [(ngModel)] = "materialPostPieza" placeholder="ingrese el material">
-<input type="text" [(ngModel)] = "pesoPostPieza" placeholder="ingrese el peso">
-<button (click)="postPieza()">Post pieza</button>
-<p>{{respuestaPostPieza}}</p>
+        <h2>Borrar pieza</h2>
+        <input type="number" [(ngModel)]="idDeletePieza" placeholder="ingrese el id">
+        <button (click)="deletePieza()">Delete pieza</button>
+        <p>{{respuestaDeletePieza}}</p>
 
-<hr>
+        <h2>Modificar pieza (dejar campo vacio si no se quiere modificar)</h2>
+        <h4>El campo de id es obligatorio y es para saber que pieza modificar</h4>
+        <input type="number" [(ngModel)]="idPatchPieza" placeholder="ingrese el id">
+        <input type="text" [(ngModel)]="materialPatchPieza" placeholder="ingrese el material">
+        <input type="number" [(ngModel)]="pesoPatchPieza" placeholder="ingrese el peso">
+        <button (click)="patchPieza()">Patch pieza</button>
+        <p>{{respuestaPatchPieza}}</p>
 
-<p>Borrar pieza</p>
-<input type="number" [(ngModel)]="idDeletePieza" placeholder="ingrese el id">
-<button (click)="deletePieza()">Delete pieza</button>
-<p>{{respuestaDeletePieza}}</p>
+        <h2>Añadir componente a pieza</h2>
+        <input type="number" [(ngModel)]="idPiezaPadrePost" placeholder="ingrese el id componente padre">
+        <input type="number" [(ngModel)]="idComponenteNuevoPost" placeholder="ingrese el id nuevo componente">
+        <button (click)="postComponente()">Post componentes</button>
+        <p>{{respuestaNuevoComponentePiezaPost}}</p>
 
-<hr>
-<p>Modificar pieza (dejar campo vacio si no se quiere modificar)</p>
-<p>El campo de id es obligatorio y es para saber que pieza modificar</p>
-<input type="number" [(ngModel)]="idPatchPieza" placeholder="ingrese el id">
-<input type="text" [(ngModel)]="materialPatchPieza" placeholder="ingrese el material">
-<input type="number" [(ngModel)]="pesoPatchPieza" placeholder="ingrese el peso">
-<button (click)="patchPieza()">Patch pieza</button>
-<p>{{respuestaPatchPieza}}</p>
+        <h2>Recibir componentes de pieza</h2>
+        <input type="number" [(ngModel)]="idComponentesPieza" placeholder="ingrese el id">
+        <button (click)="getAllComponentes()">Get componentes</button>
+        <p>{{respuestaComponentesPieza}}</p>
+        <table *ngIf=getComponentes>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Material</th>
+                    <th>Peso</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of componentesLista; let i = index" [attr.data-index]="i">
+                    <td>{{componentesLista[i].id}}</td>
+                    <td>{{componentesLista[i].material}}</td>
+                    <td>{{componentesLista[i].peso}}</td>
+                </tr>
+            </tbody>
+        </table>
 
-<hr>
+        <h2>Borrar componente</h2>
+        <input type="number" [(ngModel)]="idPiezaPadreDelete" placeholder="ingrese el id componente padre">
+        <input type="number" [(ngModel)]="idComponenteNuevoDelete" placeholder="ingrese el id del componente">
+        <button (click)="deleteComponent()">Post componentes</button>
+        <p>{{respuestaNuevoComponentePiezaDelete}}</p>
 
-<p>Añadir componente a pieza</p>
-<input type="number" [(ngModel)]="idPiezaPadrePost" placeholder="id componente padre">
-<input type="number" [(ngModel)]="idComponenteNuevoPost" placeholder="id nuevo componente">
-<button (click)="postComponente()">Post componentes</button>
-<p>{{respuestaNuevoComponentePiezaPost}}</p>
+        <button style="background-color: red; margin: 0; align-self: flex-end; margin-left: 3vw;" (click)="volverMenu()">Volver al menu</button>
+    </div>
+</body>
 
-<hr>
-
-<p>Recibir componentes de pieza</p>
-<input type="number" [(ngModel)]="idComponentesPieza" placeholder="ingrese el id">
-<button (click)="getAllComponentes()">Get componentes</button>
-<p>{{respuestaComponentesPieza}}</p>
-<table *ngIf=getComponentes>
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Material</th>
-            <th>Peso</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor = "let item of componentesLista; let i = index" [attr.data-index]="i">
-            <td>{{componentesLista[i].id}}</td>
-            <td>{{componentesLista[i].material}}</td>
-            <td>{{componentesLista[i].peso}}</td>
-        </tr>
-    </tbody>
-</table>
-
-<hr>
-
-<p>BorrarComponentes</p>
-<input type="number" [(ngModel)]="idPiezaPadreDelete" placeholder="id componente padre">
-<input type="number" [(ngModel)]="idComponenteNuevoDelete" placeholder="id nuevo componente">
-<button (click)="deleteComponent()">Post componentes</button>
-<p>{{respuestaNuevoComponentePiezaDelete}}</p>
-
-<hr>
-
-<button (click)="volverMenu()">Volver al menu</button>
+</html>

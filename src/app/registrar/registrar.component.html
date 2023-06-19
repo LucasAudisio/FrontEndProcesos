@@ -1,8 +1,22 @@
-<input type="text" [(ngModel)] = "nombre" placeholder="Ingrese el nombre">
-<p>Requerimientos contraseña: minimo 8 caracteres</p>
-<input type="password" [(ngModel)] = "contrasenia" placeholder="Ingrese la contraseña">
-
-<button (click) = 'registrarse()'>Registrarse</button>
-<p> {{error}} </p>
-<br>
-<a href="/login">Presiona aqui si ya tenes cuenta</a>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div class="container">
+        <h1>Registrarse</h1>
+        <input type="text" [(ngModel)] = "nombre" placeholder="Ingrese el nombre">
+        <input type="password" [(ngModel)] = "contrasenia" placeholder="Ingrese la contraseña">
+        <br>
+        <div>
+            <button style="background-color: red;" (click)="volverMenu()">Volver al menú</button>
+            <button (click)="registrarse()">Registrarse</button>
+        </div>
+        <p> {{error}} </p>
+        <br>
+        <a href="/login">Presiona aqui si ya tenes cuenta</a>
+    </div>
+</body>
+</html>

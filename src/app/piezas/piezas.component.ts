@@ -98,6 +98,7 @@ export class PiezasComponent {
     else {
       this.http.getPiezas().subscribe({
         next: (data) => {
+          this.errorPiezasLista= "";
           console.log(data);
           console.log(JSON.parse(JSON.stringify(data)).data[0])
           this.piezasLista = JSON.parse(JSON.stringify(data)).data;
@@ -114,7 +115,7 @@ export class PiezasComponent {
     if (localStorage["clave"] == undefined) {
       this.respuestaGetPieza = "inicie sesion para acceder a estos datos"
     }
-    else if (this.idGetPieza.valueOf() <= 0) {
+    else if (this.idGetPieza.valueOf() <= 0 || isNaN(this.idGetPieza.valueOf())) {
       this.respuestaGetPieza = "id invalido";
     }
     else {
@@ -166,7 +167,7 @@ export class PiezasComponent {
     if (localStorage["clave"] == undefined) {
       this.respuestaDeletePieza = "inicie sesion para acceder a estos datos"
     }
-    else if (this.idDeletePieza.valueOf() <= 0) {
+    else if (this.idDeletePieza.valueOf() <= 0 || isNaN(this.idDeletePieza.valueOf())) {
       this.respuestaDeletePieza = "id invalido";
     }
     else {
@@ -197,7 +198,7 @@ export class PiezasComponent {
     if (localStorage["clave"] == undefined) {
       this.respuestaPatchPieza = "inicie sesion para acceder a estos datos"
     }
-    else if (this.idPatchPieza.valueOf() <= 0) {
+    else if (this.idPatchPieza.valueOf() <= 0 || isNaN(this.idPatchPieza.valueOf())) {
       this.respuestaPatchPieza = "id invalido";
     }
     else {
@@ -240,7 +241,7 @@ export class PiezasComponent {
     if (localStorage["clave"] == undefined) {
       this.respuestaComponentesPieza = "inicie sesion para acceder a estos datos"
     }
-    else if (this.idComponentesPieza.valueOf() <= 0) {
+    else if (this.idComponentesPieza.valueOf() <= 0 || isNaN(this.idComponentesPieza.valueOf())) {
       this.respuestaComponentesPieza = "id invalido";
     }
     else {
@@ -253,6 +254,7 @@ export class PiezasComponent {
                 this.componentesLista = JSON.parse(JSON.stringify(data)).data;
                 this.getComponentes = true;
                 console.log(this.componentesLista);
+                this.respuestaComponentesPieza = "";
               },
               error: (error) => {
                 this.respuestaComponentesPieza = error.error;
@@ -274,7 +276,8 @@ export class PiezasComponent {
     if (localStorage["clave"] == undefined) {
       this.respuestaNuevoComponentePiezaPost = "inicie sesion para acceder a estos datos"
     }
-    else if (this.idPiezaPadrePost.valueOf() <= 0 || this.idComponenteNuevoPost.valueOf() <= 0) {
+    else if (this.idPiezaPadrePost.valueOf() <= 0 || this.idComponenteNuevoPost.valueOf() <= 0
+      || isNaN(this.idPiezaPadrePost.valueOf()) || isNaN(this.idComponenteNuevoPost.valueOf())) {
       this.respuestaNuevoComponentePiezaPost = "id(s) invalido";
     }
     else {
@@ -318,7 +321,8 @@ export class PiezasComponent {
     if (localStorage["clave"] == undefined) {
       this.respuestaNuevoComponentePiezaDelete = "inicie sesion para acceder a estos datos"
     }
-    else if (this.idPiezaPadreDelete.valueOf() <= 0 || this.idComponenteNuevoDelete.valueOf() <= 0) {
+    else if (this.idPiezaPadreDelete.valueOf() <= 0 || this.idComponenteNuevoDelete.valueOf() <= 0 
+    || isNaN(this.idPiezaPadreDelete.valueOf()) || isNaN(this.idComponenteNuevoDelete.valueOf())) {
       this.respuestaNuevoComponentePiezaDelete = "id(s) invalido";
     }
     else {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';  
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpService } from '../http-client-mio.service';
 
@@ -12,38 +12,37 @@ export class RegistrarComponent {
   contrasenia: String;
   error: String;
 
-  constructor(private http: HttpService, private router: Router){
+  constructor(private http: HttpService, private router: Router) {
     this.nombre = "";
     this.contrasenia = "";
     this.error = "";
   }
 
-  registrarse(){
-    if(this.contrasenia.length < 8){
-      this.error = "contraseña corta";
+  registrarse() {
+    const bodyData = {
+      name: this.nombre,
+      password: this.contrasenia
     }
-    else{
-      const bodyData = {
-        name: this.nombre,
-        password: this.contrasenia
+
+    this.http.registrarse(bodyData).subscribe({
+      next: (data) => {
+        console.log(data)
+        this.router.navigate(["/login"]);
+      },
+      error: (error) => {
+        console.log(error)
+        this.error = error.error;
       }
-  
-      this.http.registrarse(bodyData).subscribe({
-        next: (data) => {
-          console.log(data)
-          this.router.navigate(["/login"]);
-        },
-        error: (error) => {
-          console.log(error)
-          this.error = error.error;
-        }
-      });
+    });
+  }
+
+  ngOnInit() {
+    if (localStorage["clave"] != undefined) {
+      this.router.navigate(["/"]);
     }
   }
 
-  ngOnInit(){
-    if(localStorage["clave"] != undefined){
-      this.router.navigate(["/"]);
-    }
+  volverMenu() {
+    this.router.navigate(["/"]);
   }
 }
